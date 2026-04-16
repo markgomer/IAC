@@ -1,9 +1,23 @@
-import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
 
-// Create an AWS resource (S3 Bucket)
-const bucket = new aws.s3.Bucket("my-bucket");
+const bucket = new aws.s3.Bucket("s3-bucket-pulumi", {
+  bucket: 'marksoulz-s3-bucket-pulumi',
+  tags: {
+    IAC: "true",
+  },
+});
 
-// Export the name of the bucket
+const ecr = new aws.ecr.Repository("ecr-pulumi", {
+  name: "ecr-pulumi",
+  imageTagMutability: "IMMUTABLE",
+  tags: {
+    IAC: "true"
+  }
+})
+
 export const bucketName = bucket.id;
+export const bucketRegion = bucket.region;
+export const bucketArn = bucket.arn;
+
+export const ecrName = ecr.name;
+export const ecrRepoURL = ecr.repositoryUrl;
