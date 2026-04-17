@@ -23,8 +23,8 @@ jobs:
         id: install-deps
         run: bun i
 
-      - name: Setup AWS Credentials
-        id: setup-aws-cred
+      - name: Configure AWS Credentials
+        id: configure-aws-cred
         uses: aws-actions/configure-aws-credentials@v6
         with:
           # grab the keys on AWS (security >> access keys);
